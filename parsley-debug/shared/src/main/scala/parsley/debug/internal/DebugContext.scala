@@ -8,7 +8,7 @@ package parsley.debug.internal
 import scala.collection.mutable
 
 import parsley.XAssert
-import parsley.debug.ParseAttempt
+import parsley.debug.*
 import parsley.internal.deepembedding.frontend.LazyParsley
 
 // Class used to hold details about a parser being debugged.
