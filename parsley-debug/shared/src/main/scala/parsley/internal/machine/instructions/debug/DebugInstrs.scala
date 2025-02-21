@@ -105,7 +105,10 @@ private [internal] class DropSnapshot(dtx: DivergenceContext) extends Instr {
 
 
 private [internal] class TriggerBreakpoint(dbgCtx: DebugContext) extends Instr {
-  override def apply(ctx: Context): Unit = dbgCtx.handleBreak(ctx.input)
+  override def apply(ctx: Context): Unit = {
+    dbgCtx.handleBreak(ctx.input)
+    ctx.inc()
+  }
   
   override def toString: String = "TriggerBreakpoint"
 }

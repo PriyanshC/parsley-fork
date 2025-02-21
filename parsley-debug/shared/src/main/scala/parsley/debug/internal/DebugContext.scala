@@ -102,27 +102,10 @@ private [parsley] class DebugContext(private val toStringRules: PartialFunction[
 
     // Push a new parser onto the parser callstack.
     def push(fullInput: String, parser: LazyParsley[_], userAssignedName: Option[String]): Unit = {
-        // Send the debug tree here if EntryBreak
-        parser match {
-            case break: RemoteBreak[_] => break.break match {
-                case EntryBreak | FullBreak => handleBreak(fullInput)
-                case _ => 
-            }
-            case _ =>
-        }
 
         val newTree = new TransientDebugTree(fullInput = fullInput)
         newTree.name = Renamer.nameOf(userAssignedName, parser)
         newTree.internal = Renamer.internalName(parser)
-
-        // Send the debug tree here if ExitBreak
-        parser match {
-            case break: RemoteBreak[_] => break.break match {
-                case ExitBreak | FullBreak => handleBreak(fullInput)
-                case _ => 
-            }
-            case _ =>
-        }
 
         //val uid = nextUid()
         //builderStack.head.children(s"${newTree.name}-#$uid") = newTree
